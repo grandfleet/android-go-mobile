@@ -53,7 +53,7 @@ RUN set -eux; \
 		libxinerama-dev \
 		libxrandr-dev \
 		libxxf86vm-dev \
-		golang
+		golang \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	export \
