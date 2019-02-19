@@ -33,7 +33,7 @@ RUN $ANDROID_HOME/tools/bin/sdkmanager "ndk-bundle"
 ## - docker run --rm debian:stretch grep '^hosts:' /etc/nsswitch.conf
 RUN echo 'hosts: files dns' > /etc/nsswitch.conf
 
-ENV GOLANG_VERSION 1.10.3
+ENV GOLANG_VERSION 1.11.5
 
 RUN set -eux; \
 	apt-get update; \
@@ -74,6 +74,18 @@ RUN set -eux; \
 	export PATH="/usr/local/go/bin:$PATH"; \
 	go version
 
+# Install libraries for golang game framework
+RUN apt-get update && \
+	apt-get install -y libx11-dev \
+					libgl1-mesa-dev \
+					libasound2-dev \
+					libgles2-mesa-dev \
+					libalut-dev \
+					libxcursor-dev \
+					libxi-dev \
+					libxinerama-dev \
+					libxrandr-dev \
+					libxxf86vm-dev
 # persist new go in PATH
 ENV PATH /usr/local/go/bin:$PATH
 
