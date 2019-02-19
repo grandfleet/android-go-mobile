@@ -35,6 +35,7 @@ RUN echo 'hosts: files dns' > /etc/nsswitch.conf
 
 ENV GOLANG_VERSION 1.11.5
 
+# Install libraries for golang game framework
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
@@ -42,7 +43,17 @@ RUN set -eux; \
 		build-essential \
 		openssl \
 		libssl-dev \
-		golang \
+		libx11-dev \
+		libgl1-mesa-dev \
+		libasound2-dev \
+		libgles2-mesa-dev \
+		libalut-dev \
+		libxcursor-dev \
+		libxi-dev \
+		libxinerama-dev \
+		libxrandr-dev \
+		libxxf86vm-dev \
+		golang
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	export \
@@ -74,18 +85,7 @@ RUN set -eux; \
 	export PATH="/usr/local/go/bin:$PATH"; \
 	go version
 
-# Install libraries for golang game framework
-RUN apt-get update && \
-	apt-get install -y libx11-dev \
-					libgl1-mesa-dev \
-					libasound2-dev \
-					libgles2-mesa-dev \
-					libalut-dev \
-					libxcursor-dev \
-					libxi-dev \
-					libxinerama-dev \
-					libxrandr-dev \
-					libxxf86vm-dev
+
 # persist new go in PATH
 ENV PATH /usr/local/go/bin:$PATH
 
